@@ -5,8 +5,6 @@ import { MockDataRepoService } from './mock-data-repo/mock-data-repo.service';
 
 describe('AppController', () => {
   let appController: AppController;
-  let appService: AppService;
-  let repoService: MockDataRepoService;
 
   const data = [
     {
@@ -49,8 +47,6 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
-    repoService = new MockDataRepoService(data);
-    appService = new AppService(repoService);
   });
 
   describe('search', () => {
