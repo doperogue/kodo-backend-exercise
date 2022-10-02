@@ -5,6 +5,8 @@ import { MockDataInterface } from './interfaces/mockData.interface';
 
 @Injectable()
 export class AppService {
+  constructor() {}
+
   public findAll(): MockDataInterface[] {
     return MockData;
   }

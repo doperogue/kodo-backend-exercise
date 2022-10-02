@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 
 describe('AppController', () => {
   let appController: AppController;
+  let appService: AppService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -12,11 +13,15 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
+    appService = new AppService();
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  describe('search', () => {
+    it('fuzzy search', () => {
+      //todo: Improve this test after implementing Model Injection
+      expect(appController.index({ searchString: 'Dynamic' })).toBe(
+        appService.list({ searchString: 'Dynamic' }),
+      );
     });
   });
 });
