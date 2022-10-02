@@ -10,7 +10,7 @@ export class AppController {
   @Get()
   index(@Query() listDto: ListDto): MockDataInterface[] {
     return listDto.searchString
-      ? this.appService.list(listDto)
+      ? this.appService.strictSearch(listDto)
       : this.appService.findAll();
   }
 }
