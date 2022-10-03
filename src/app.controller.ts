@@ -1,8 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ListDto } from './dtos/List.dto';
+import { ListDto } from './dtos/list.dto';
 import { MockDataInterface } from './interfaces/mockData.interface';
-import { strictSearchRegex } from './constants';
 
 @Controller()
 export class AppController {
@@ -10,13 +9,12 @@ export class AppController {
 
   @Get()
   index(@Query() listDto: ListDto): MockDataInterface[] {
-    if (listDto.searchString.match(strictSearchRegex)) {
-      console.log('this is working');
-      return this.appService.strictSearch(listDto);
+    let searchResults = this.appService.search(listDto);
+
+    if (listDto.sortBy) {
+      searchResults = this.appService.sort(listDto, searchResults);
     }
 
-    return listDto.searchString
-      ? this.appService.fuzzySearch(listDto)
-      : this.appService.findAll();
+    return searchResults;
   }
 }
