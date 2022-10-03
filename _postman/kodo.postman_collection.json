@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "69bf464a-c07f-494e-a045-2ba0795b1c61",
+		"name": "kodo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23648293"
+	},
+	"item": [
+		{
+			"name": "List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"searchString\": \"Designer\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}?searchString=&sortBy=&perPage=&page=",
+					"host": [
+						"{{host}}"
+					],
+					"query": [
+						{
+							"key": "searchString",
+							"value": "",
+							"description": "Use double quotes(\"\") for strict search"
+						},
+						{
+							"key": "sortBy",
+							"value": "",
+							"description": "Sort by name or dateLastEdited"
+						},
+						{
+							"key": "perPage",
+							"value": "",
+							"description": "perpage item count in result"
+						},
+						{
+							"key": "page",
+							"value": "",
+							"description": "page number"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
