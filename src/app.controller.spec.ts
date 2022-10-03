@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MockDataRepoService } from './mock-data-repo/mock-data-repo.service';
+import { PaginationService } from './pagination/pagination.service';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -33,6 +34,7 @@ describe('AppController', () => {
           provide: 'MockDataRepository',
           useValue: data,
         },
+        PaginationService,
       ],
     }).compile();
 
@@ -58,9 +60,9 @@ describe('AppController', () => {
         },
       ];
 
-      expect(appController.index({ searchString: 'the king' })).toStrictEqual(
-        fuzzyResult,
-      );
+      expect(
+        appController.index({ searchString: 'the king' }).items,
+      ).toStrictEqual(fuzzyResult);
     });
 
     it('strict search', () => {
@@ -74,9 +76,9 @@ describe('AppController', () => {
         },
       ];
 
-      expect(appController.index({ searchString: '"the king"' })).toStrictEqual(
-        strictResult,
-      );
+      expect(
+        appController.index({ searchString: '"the king"' }).items,
+      ).toStrictEqual(strictResult);
     });
 
     it('sorting', () => {
@@ -98,7 +100,8 @@ describe('AppController', () => {
       ];
 
       expect(
-        appController.index({ searchString: '', sortBy: 'dateLastEdited' }),
+        appController.index({ searchString: '', sortBy: 'dateLastEdited' })
+          .items,
       ).toStrictEqual(sortResult);
     });
   });
